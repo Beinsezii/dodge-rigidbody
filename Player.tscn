@@ -1,0 +1,65 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://art/playerGrey_walk1.png" type="Texture" id=1]
+[ext_resource path="res://art/playerGrey_walk2.png" type="Texture" id=2]
+[ext_resource path="res://Player.gd" type="Script" id=3]
+[ext_resource path="res://art/playerGrey_up1.png" type="Texture" id=4]
+[ext_resource path="res://art/playerGrey_up2.png" type="Texture" id=5]
+[ext_resource path="res://art/explo/explosion-16.png" type="Texture" id=6]
+[ext_resource path="res://art/explo/explosion-15.png" type="Texture" id=7]
+[ext_resource path="res://art/explo/explosion-8.png" type="Texture" id=8]
+[ext_resource path="res://art/explo/explosion-9.png" type="Texture" id=9]
+[ext_resource path="res://art/explo/explosion-14.png" type="Texture" id=10]
+[ext_resource path="res://art/explo/explosion-2.png" type="Texture" id=11]
+[ext_resource path="res://art/explo/explosion-10.png" type="Texture" id=12]
+[ext_resource path="res://art/explo/explosion-0.png" type="Texture" id=13]
+[ext_resource path="res://art/explo/explosion-7.png" type="Texture" id=14]
+[ext_resource path="res://art/explo/explosion-1.png" type="Texture" id=15]
+[ext_resource path="res://art/explo/explosion-11.png" type="Texture" id=16]
+[ext_resource path="res://art/explo/explosion-12.png" type="Texture" id=17]
+[ext_resource path="res://art/explo/explosion-13.png" type="Texture" id=18]
+[ext_resource path="res://art/explo/explosion-4.png" type="Texture" id=19]
+[ext_resource path="res://art/explo/explosion-6.png" type="Texture" id=20]
+[ext_resource path="res://art/explo/explosion-5.png" type="Texture" id=21]
+[ext_resource path="res://art/explo/explosion-3.png" type="Texture" id=22]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 19 ), ExtResource( 22 ), ExtResource( 11 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 18 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 8 ) ],
+"loop": false,
+"name": "explode",
+"speed": 30.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 27.0386
+height = 13.6903
+
+[node name="Player" type="RigidBody2D"]
+gravity_scale = 0.0
+can_sleep = false
+linear_damp = 1.0
+angular_damp = 5.0
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+animation = "walk"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 2 )

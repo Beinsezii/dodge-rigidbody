@@ -42,13 +42,13 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 27.0386
-height = 13.6903
+radius = 27.0
+height = 13.0
 
 [node name="Player" type="RigidBody2D"]
 gravity_scale = 0.0
 can_sleep = false
-linear_damp = 1.0
+linear_damp = 0.5
 angular_damp = 5.0
 script = ExtResource( 3 )
 

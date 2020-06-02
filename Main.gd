@@ -3,6 +3,7 @@ extends Node
 export (PackedScene) var Mob
 export (PackedScene) var Player
 var score
+var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,14 +11,13 @@ func _ready():
 
 
 func new_game():
-	var player = Player.instance()
+	player = Player.instance()
 	player.position = $StartPosition.position
 	add_child(player)
 	player.connect('dead', self, 'game_over')
 	score = 0
 	$HUD.update_score(score)
 	$HUD.show_message("")
-	player.show()
 	$StartTimer.start()
 	
 
@@ -41,10 +41,6 @@ func _on_MobTimer_timeout():
 	# Add some randomness to the direction.
 	direction += rand_range(-PI / 4, PI / 4)
 	mob.rotation = direction
-	# Set the velocity (speed & direction).
-	mob.speed = rand_range(mob.min_speed, mob.max_speed)
-	var mobscale = rand_range(mob.min_scale, mob.max_scale)
-	mob.scale = Vector2(mobscale, mobscale)
 
 
 func _on_ScoreTimer_timeout():
@@ -55,3 +51,9 @@ func _on_ScoreTimer_timeout():
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
+
+
+func kill_area(body):
+	if body == player:
+		player.kill()
+		player = null

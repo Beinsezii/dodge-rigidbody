@@ -15,15 +15,15 @@ animations = [ {
 "name": "swim",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
-"loop": true,
-"name": "fly",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "walk",
 "speed": 3.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "fly",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -33,16 +33,12 @@ height = 16.5033
 [node name="Mob" type="RigidBody2D" groups=[
 "mobs",
 ]]
-position = Vector2( 12.7807, 0.922318 )
-collision_mask = 0
 gravity_scale = 0.0
 can_sleep = false
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_group_": true
 }
-min_speed = 5
-max_speed = 15
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
@@ -56,4 +52,5 @@ rotation = 1.5708
 shape = SubResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -30, -25, 60, 50 )
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

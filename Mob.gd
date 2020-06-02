@@ -1,15 +1,26 @@
 extends RigidBody2D
 
-export var min_speed = 3  # Minimum speed range.
-export var max_speed = 10  # Maximum speed range.
+export var min_speed = 10
+export var max_speed = 20
+export var min_curve = 0.0
+export var max_curve = 0.25
 export var min_scale = 0.1
 export var max_scale = 2.0
-var speed = 3
+var speed = 1
+var curve = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var mob_types = $AnimatedSprite.frames.get_animation_names()
 	$AnimatedSprite.animation = mob_types[randi() % mob_types.size()]
+	speed = rand_range(min_speed, max_speed)
+	curve = clamp(
+		rand_range(min_curve, pow(max_curve, 2)),
+		0, 1
+		)
+	if randi()%2: curve = -curve
+	#var newscale = rand_range(min_scale, max_scale)
+	#scale = Vector2(newscale, newscale)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -22,7 +33,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _integrate_forces(state):
 	var tf = state.transform
-	var lv_mod: Vector2 = Vector2()
-	lv_mod += Vector2(speed, 0).rotated(tf.get_rotation())
-
-	state.linear_velocity += lv_mod
+	
+	state.angular_velocity += curve
+	state.linear_velocity += Vector2(speed, 0).rotated(tf.get_rotation())

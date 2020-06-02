@@ -15,7 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Dodge"
+config/name="Dodge-RigidBody"
+config/description="The stock Dodge game but with RigidBody2Ds, touch controls, and explosions."
 run/main_scene="res://src/Main.tscn"
 config/icon="res://icon.png"
 

@@ -51,13 +51,15 @@ can_sleep = false
 linear_damp = 0.5
 angular_damp = 5.0
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 animation = "walk"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

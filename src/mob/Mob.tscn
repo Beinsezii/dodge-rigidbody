@@ -8,11 +8,11 @@
 [ext_resource path="res://src/mob/enemySwimming_1.png" type="Texture" id=6]
 [ext_resource path="res://src/mob/Mob.gd" type="Script" id=7]
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 24.1749
 height = 16.5033
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 5 ) ],
 "loop": true,
@@ -42,13 +42,14 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="CollisionShape2D"]
 rotation = -1.5708
 scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 animation = "walk"
+frame = 1
 playing = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

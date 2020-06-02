@@ -22,6 +22,7 @@ func _ready():
 	var newscale = rand_range(min_scale, max_scale)
 	$CollisionShape2D.scale = Vector2(newscale, newscale)
 	mass *= pow(newscale, 2)
+	speed /= mass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

@@ -1,2 +1,2 @@
 # dodge-rigidbody
-The dodge tutorial game modified to use RigidBody2d, and to use touch/mouse controls.
+The stock Dodge game but with RigidBody2Ds, touch controls, and explosions.

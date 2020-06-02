@@ -8,16 +8,13 @@ var player
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	ready_game()
 
 
-func new_game():
-	player = Player.instance()
-	player.position = $StartPosition.position
-	add_child(player)
-	player.connect('dead', self, 'game_over')
+func start_game():
 	score = 0
 	$HUD.update_score(score)
-	$HUD.show_message("")
+	player.controllable = true
 	$StartTimer.start()
 	
 
@@ -25,7 +22,18 @@ func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	get_tree().call_group("mobs", "queue_free")
-	$HUD.show_game_over()
+	$HUD/Message.text = "game over"
+	$HUD/Message.show()
+	yield(get_tree().create_timer(1), "timeout")
+	ready_game()
+	
+
+func ready_game():
+	player = Player.instance()
+	player.position = $StartPosition.position
+	player.controllable = false
+	add_child(player)
+	$HUD.show_new_game()
 
 
 func _on_MobTimer_timeout():
@@ -55,5 +63,7 @@ func _on_StartTimer_timeout():
 
 func kill_area(body):
 	if body == player:
+		$StartTimer.stop()
 		player.kill()
 		player = null
+		game_over()

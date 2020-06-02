@@ -4,24 +4,26 @@ signal dead
 
 export var speed: float = 25
 export var turn_speed: float = 0.5
-var screen_size
+var controllable: bool = true
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	screen_size = get_viewport_rect().size
+# func _ready():
+	# pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$AnimatedSprite.speed_scale = min(3, linear_velocity.length() * 0.01)
+	$Body/Sclera.look_at(get_global_mouse_position())
 
 
 func kill():
 	emit_signal("dead")
+	controllable=false
 	sleeping=true
-	$AnimatedSprite.speed_scale = 1
-	$AnimatedSprite.animation = 'explode'
-	yield($AnimatedSprite, "animation_finished")
+	$Body.hide()
+	$Explosion.show()
+	$Explosion.play()
+	yield($Explosion, "animation_finished")
 	queue_free()
 
 
@@ -36,7 +38,7 @@ func _integrate_forces(state):
 	# Movement
 	var tf = state.transform
 	var lv_mod: Vector2 = Vector2()
-	if Input.is_mouse_button_pressed(1):
+	if Input.is_mouse_button_pressed(1) && controllable:
 		lv_mod += Vector2(speed, 0).rotated(tf.get_rotation())
 	
 	look_towards(state, get_global_transform(), get_global_mouse_position())

@@ -16,12 +16,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Dodge"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://src/Main.tscn"
 config/icon="res://icon.png"
-
-[debug]
-
-settings/stdout/print_fps=true
 
 [display]
 

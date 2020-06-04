@@ -1,5 +1,6 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
+[ext_resource path="res://src/player/TailPhysics.gd" type="Script" id=1]
 [ext_resource path="res://src/player/Player.gd" type="Script" id=3]
 [ext_resource path="res://src/player/meme explosin/explosion-16.png" type="Texture" id=6]
 [ext_resource path="res://src/player/meme explosin/explosion-15.png" type="Texture" id=7]
@@ -70,7 +71,6 @@ color = Color( 0.678431, 0.8, 0.439216, 1 )
 polygon = PoolVector2Array( 4, -24, 28, -1.90735e-06, 4, 24, -36, -1.90735e-06 )
 
 [node name="FinBodyPin" type="PinJoint2D" parent="Body"]
-visible = false
 position = Vector2( -12, -12 )
 node_a = NodePath("../..")
 node_b = NodePath("Body")
@@ -82,25 +82,26 @@ __meta__ = {
 [node name="Body" type="RigidBody2D" parent="Body/FinBodyPin"]
 collision_layer = 0
 collision_mask = 0
-mass = 0.02
+mass = 0.03
 gravity_scale = 0.0
 can_sleep = false
+script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
+turnspeed = 8.0
 
 [node name="Polygon" type="Polygon2D" parent="Body/FinBodyPin/Body"]
-scale = Vector2( 0.5, 0.35 )
+scale = Vector2( 0.75, 0.35 )
 color = Color( 0.678431, 0.8, 0.439216, 1 )
 polygon = PoolVector2Array( 4, -8, 12, 0, 4, 8, -28, 8, -36, 0, -28, -8 )
 
 [node name="Collision" type="CollisionPolygon2D" parent="Body/FinBodyPin/Body"]
-position = Vector2( -1.95, 0 )
-scale = Vector2( 0.5, 0.35 )
+position = Vector2( -3, 0 )
+scale = Vector2( 0.75, 0.35 )
 polygon = PoolVector2Array( 8, -8, 16, 0, 8, 8, -24, 8, -32, 0, -24, -8, 8, -8 )
 
 [node name="FinBodyPin2" type="PinJoint2D" parent="Body"]
-visible = false
 position = Vector2( -12, 12 )
 node_a = NodePath("../..")
 node_b = NodePath("Body")
@@ -112,21 +113,23 @@ __meta__ = {
 [node name="Body" type="RigidBody2D" parent="Body/FinBodyPin2"]
 collision_layer = 0
 collision_mask = 0
-mass = 0.02
+mass = 0.03
 gravity_scale = 0.0
 can_sleep = false
+script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
+turnspeed = 8.0
 
 [node name="Polygon" type="Polygon2D" parent="Body/FinBodyPin2/Body"]
-scale = Vector2( 0.5, 0.35 )
+scale = Vector2( 0.75, 0.35 )
 color = Color( 0.678431, 0.8, 0.439216, 1 )
 polygon = PoolVector2Array( 4, -8, 12, 0, 4, 8, -28, 8, -36, 0, -28, -8 )
 
 [node name="Collision" type="CollisionPolygon2D" parent="Body/FinBodyPin2/Body"]
-position = Vector2( -1.95, 0 )
-scale = Vector2( 0.5, 0.35 )
+position = Vector2( -3, 0 )
+scale = Vector2( 0.75, 0.35 )
 polygon = PoolVector2Array( 8, -8, 16, 0, 8, 8, -24, 8, -32, 0, -24, -8, 8, -8 )
 
 [node name="TailRootBodyPin" type="PinJoint2D" parent="Body"]
@@ -142,20 +145,21 @@ mass = 0.05
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 can_sleep = false
+script = ExtResource( 1 )
+turnspeed = 3.0
 
 [node name="Polygon" type="Polygon2D" parent="Body/TailRootBodyPin/Body"]
-scale = Vector2( 1, 0.6 )
+scale = Vector2( 1, 0.5 )
 color = Color( 0.678431, 0.8, 0.439216, 1 )
 polygon = PoolVector2Array( 4, -8, 12, 0, 4, 8, -28, 8, -36, 0, -28, -8 )
 
 [node name="Collision" type="CollisionPolygon2D" parent="Body/TailRootBodyPin/Body"]
 position = Vector2( -4, 0 )
-scale = Vector2( 1, 0.6 )
+scale = Vector2( 1, 0.5 )
 polygon = PoolVector2Array( 8, -8, 16, 0, 8, 8, -24, 8, -32, 0, -24, -8, 8, -8 )
 
 [node name="EndRootPin" type="PinJoint2D" parent="Body/TailRootBodyPin/Body"]
-visible = false
-position = Vector2( -28, -4 )
+position = Vector2( -28, -2 )
 rotation = 0.785398
 node_a = NodePath("..")
 node_b = NodePath("Body")
@@ -170,9 +174,11 @@ collision_mask = 0
 mass = 0.01
 gravity_scale = 0.0
 can_sleep = false
+script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
+turnspeed = 4.0
 
 [node name="Polygon" type="Polygon2D" parent="Body/TailRootBodyPin/Body/EndRootPin/Body"]
 scale = Vector2( 0.35, 0.25 )
@@ -180,13 +186,12 @@ color = Color( 0.678431, 0.8, 0.439216, 1 )
 polygon = PoolVector2Array( 4, -8, 12, 0, 4, 8, -28, 8, -36, 0, -28, -8 )
 
 [node name="Collision" type="CollisionPolygon2D" parent="Body/TailRootBodyPin/Body/EndRootPin/Body"]
-position = Vector2( -1.35, 0 )
+position = Vector2( -1.4, 0 )
 scale = Vector2( 0.35, 0.25 )
 polygon = PoolVector2Array( 8, -8, 16, 0, 8, 8, -24, 8, -32, 0, -24, -8, 8, -8 )
 
 [node name="EndRootPin2" type="PinJoint2D" parent="Body/TailRootBodyPin/Body"]
-visible = false
-position = Vector2( -28, 4 )
+position = Vector2( -28, 2 )
 rotation = -0.785398
 node_a = NodePath("..")
 node_b = NodePath("Body")
@@ -201,9 +206,11 @@ collision_mask = 0
 mass = 0.01
 gravity_scale = 0.0
 can_sleep = false
+script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
+turnspeed = 4.0
 
 [node name="Polygon" type="Polygon2D" parent="Body/TailRootBodyPin/Body/EndRootPin2/Body"]
 scale = Vector2( 0.35, 0.25 )
@@ -211,7 +218,7 @@ color = Color( 0.678431, 0.8, 0.439216, 1 )
 polygon = PoolVector2Array( 4, -8, 12, 0, 4, 8, -28, 8, -36, 0, -28, -8 )
 
 [node name="Collision" type="CollisionPolygon2D" parent="Body/TailRootBodyPin/Body/EndRootPin2/Body"]
-position = Vector2( -1.35, 0 )
+position = Vector2( -1.4, 0 )
 scale = Vector2( 0.35, 0.25 )
 polygon = PoolVector2Array( 8, -8, 16, 0, 8, 8, -24, 8, -32, 0, -24, -8, 8, -8 )
 
